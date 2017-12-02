@@ -1,5 +1,8 @@
 package;
 
+import flixel.util.FlxColor;
+import flixel.util.FlxSpriteUtil;
+import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.FlxState;
 
@@ -16,6 +19,9 @@ class PlayState extends FlxState
 
         add(level.collisionGroup);
 
+        add(level.player.light);
+        add(level.darkness);
+
         FlxG.camera.setScrollBoundsRect(level.bounds.x, level.bounds.y, level.bounds.width, level.bounds.height);
         FlxG.worldBounds.copyFrom(level.bounds);
 
@@ -27,4 +33,9 @@ class PlayState extends FlxState
         level.update(elapsed);
 		super.update(elapsed);
 	}
+
+    override public function draw():Void {
+        FlxSpriteUtil.fill(level.darkness, FlxColor.BLACK);
+        super.draw();
+    }
 }

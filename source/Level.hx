@@ -1,5 +1,8 @@
 package ;
-import flixel.addons.editors.tiled.TiledTile;
+import flash.display.BlendMode;
+import flixel.util.FlxColor;
+import flixel.FlxSprite;
+import ent.Player;
 import flixel.util.FlxSort;
 import flixel.FlxG;
 import flixel.addons.editors.tiled.TiledObject;
@@ -20,6 +23,9 @@ class Level extends TiledMap {
 
     public var collisionGroup:FlxTypedGroup<FlxObject>;
     public var characterGroup:FlxTypedGroup<Player>;
+    public var player:Player;
+
+    public var darkness:FlxSprite;
 
     public var bounds:FlxRect;
 
@@ -58,6 +64,11 @@ class Level extends TiledMap {
             backgroundGroup.add(tilemap);
         }
 
+        darkness = new FlxSprite(0, 0);
+        darkness.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+        darkness.scrollFactor.x = darkness.scrollFactor.y = 0;
+        darkness.blend = BlendMode.MULTIPLY;
+
         loadObjects();
     }
 
@@ -88,6 +99,17 @@ class Level extends TiledMap {
                 var coll:FlxObject = new FlxObject(x, y, Obj.width, Obj.height);
                 coll.immovable = true;
                 collisionGroup.add(coll);
+
+            case "player":
+                if (player == null)
+                {
+                    player = new Player(x, y, "assets/images/player.png", darkness);
+                    player.setBoundsMap(bounds);
+                    FlxG.camera.follow(player);
+                    characterGroup.add(player);
+                }
+                else
+                    throw "There can't be more than one player";
         }
     }
 

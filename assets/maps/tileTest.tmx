@@ -18,10 +18,10 @@
   <object id="12" type="collision" x="513.583" y="0.583333" width="502.833" height="8.5" rotation="90"/>
   <object id="13" type="collision" x="8.91683" y="1.08333" width="502.833" height="8.5" rotation="90"/>
   <object id="14" type="collision" x="8.25" y="-0.25" width="496.5" height="8.5"/>
-  <object id="15" type="collision" x="232.667" y="343.333" width="14.6667" height="88"/>
+  <object id="15" type="collision" x="232.667" y="343.333" width="14.6667" height="85"/>
   <object id="16" type="collision" x="248" y="343.333" width="63.3333" height="16.6667"/>
   <object id="17" type="collision" x="295.333" y="360" width="16" height="128.667"/>
-  <object id="18" type="collision" x="231.333" y="438.667" width="64" height="50"/>
+  <object id="18" type="collision" x="231.333" y="442.167" width="64" height="46.5"/>
   <object id="20" type="collision" x="343.333" y="480" width="134.667" height="7.33333"/>
   <object id="21" type="collision" x="351.333" y="472.667" width="128" height="7.33333"/>
   <object id="22" type="collision" x="360" y="464" width="119.333" height="7.33333"/>
