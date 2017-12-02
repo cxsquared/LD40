@@ -17,6 +17,13 @@ class Player extends FlxExtendedSprite {
         super(X, Y);
 
         loadGraphic(Graphics, true, 8, 8);
+        animation.add("walking", [1, 2], 6);
+        animation.add("idle", [0]);
+
+        setFacingFlip(FlxObject.UP, false, true);
+        setFacingFlip(FlxObject.LEFT, false, false);
+        setFacingFlip(FlxObject.RIGHT, true, false);
+        setFacingFlip(FlxObject.DOWN, false, false);
 
         collisionMap = new FlxRect(0, 0, 8, 8);
 
@@ -28,7 +35,7 @@ class Player extends FlxExtendedSprite {
         drag.y = maxVelocity.y * 4;
 
         light = new Light(X, Y, Darkness);
-        light.scale = FlxPoint.get(4, 4);
+        light.scale = FlxPoint.get(6, 6);
     }
 
     override public function update(elapsed:Float):Void {
@@ -57,8 +64,30 @@ class Player extends FlxExtendedSprite {
         }
         checkBoundsMap();
 
+        if (acceleration.x == 0 && acceleration.y == 0)
+        {
+            animation.play("idle");
+        }
+        else
+        {
+            animation.play("walking");
+        }
+
         light.x = this.x;
         light.y = this.y;
+
+        if (facing == FlxObject.LEFT)
+        {
+            angle = 90;
+        }
+        else if (facing == FlxObject.RIGHT)
+        {
+            angle = 270;
+        }
+        else
+        {
+            angle = 0;
+        }
 
         super.update(elapsed);
     }

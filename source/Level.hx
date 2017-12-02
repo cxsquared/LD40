@@ -1,4 +1,5 @@
 package ;
+import flixel.FlxCamera.FlxCameraFollowStyle;
 import flash.display.BlendMode;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
@@ -105,7 +106,7 @@ class Level extends TiledMap {
                 {
                     player = new Player(x, y, "assets/images/player.png", darkness);
                     player.setBoundsMap(bounds);
-                    FlxG.camera.follow(player);
+                    FlxG.camera.follow(player, FlxCameraFollowStyle.TOPDOWN_TIGHT, 2);
                     characterGroup.add(player);
                 }
                 else
