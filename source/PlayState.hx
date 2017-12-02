@@ -15,6 +15,7 @@ class PlayState extends FlxState
         level = new Level("assets/maps/tileTest.tmx");
 
         add(level.backgroundGroup);
+        add(level.coinGroup);
         add(level.characterGroup);
 
         add(level.collisionGroup);

@@ -1,4 +1,5 @@
 package ent;
+import ent.Coin.Coin;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
@@ -11,6 +12,8 @@ class Player extends FlxExtendedSprite {
 
     private var collisionMap:FlxRect;
     private var maxBounds:FlxRect;
+    private var coinMultiplyer = 5;
+    public var coins:Int;
     public var light:Light;
 
     public function new(X:Float, Y:Float, Graphics:Dynamic, Darkness:FlxSprite) {
@@ -121,5 +124,11 @@ class Player extends FlxExtendedSprite {
             y = (maxBounds.y + maxBounds.height) - collisionMap.height - collisionMap.y;
             acceleration.y = 0;
         }
+    }
+
+    public function pickUpCoin(coin:Coin): Void
+    {
+        coins += coin.getNumberOfCoins();
+        coin.destroy();
     }
 }

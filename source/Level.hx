@@ -1,4 +1,6 @@
 package ;
+import ent.Coin;
+import ent.Coin.Coin;
 import flixel.FlxCamera.FlxCameraFollowStyle;
 import flash.display.BlendMode;
 import flixel.util.FlxColor;
@@ -24,6 +26,7 @@ class Level extends TiledMap {
 
     public var collisionGroup:FlxTypedGroup<FlxObject>;
     public var characterGroup:FlxTypedGroup<Player>;
+    public var coinGroup:FlxTypedGroup<Coin>;
     public var player:Player;
 
     public var darkness:FlxSprite;
@@ -36,6 +39,7 @@ class Level extends TiledMap {
         backgroundGroup = new FlxTypedGroup<FlxTilemapExt>();
 
         characterGroup = new FlxTypedGroup<Player>();
+        coinGroup = new FlxTypedGroup<Coin>();
         collisionGroup = new FlxTypedGroup<FlxObject>();
 
         bounds = FlxRect.get(0, 0, fullWidth, fullHeight);
@@ -111,6 +115,15 @@ class Level extends TiledMap {
                 }
                 else
                     throw "There can't be more than one player";
+
+            case "coin":
+                if (!Obj.properties.contains("coinType"))
+                    throw "Coin must have a value";
+
+                var type = Obj.properties.get("coinType");
+                FlxG.log.add("Parsing coin type " + type);
+                var coin:Coin = new Coin(x, y, Std.parseInt(type));
+                coinGroup.add(coin);
         }
     }
 
@@ -124,6 +137,12 @@ class Level extends TiledMap {
     {
         FlxG.collide(characterGroup, collisionGroup);
         FlxG.collide(characterGroup, characterGroup);
+
+        FlxG.overlap(player, coinGroup, playerCoinsOverlap);
+    }
+
+    private function playerCoinsOverlap(Player:FlxObject, Coin:FlxObject):Void {
+        player.pickUpCoin(cast Coin);
     }
 
     public function updateEventsOrder()
