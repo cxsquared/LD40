@@ -1,4 +1,5 @@
 package ;
+import flixel.util.FlxTimer;
 import flixel.system.FlxSound;
 import flixel.FlxG;
 class SoundManager {
@@ -6,6 +7,7 @@ class SoundManager {
     private var coinSounds = ["Pickup_Coin.wav", "Pickup_Coin2.wav", "Pickup_Coin3.wav"];
     private var tumblerSounds =["tumblr01.wav", "tumblr02.wav", "tumblr03.wav"];
     private var fightSounds = ["fight01.wav", "fight02.wav", "fight03.wav"];
+    private var shoutSounds = ["shout01.wav", "shout02.wav", "shout03.wav"];
     private var safeLoop:FlxSound;
 
     private static var intance:SoundManager;
@@ -62,5 +64,10 @@ class SoundManager {
     public function playFight()
     {
         FlxG.sound.play("assets/sounds/" + FlxG.random.getObject(fightSounds), 1.5);
+    }
+
+    public function playShout()
+    {
+        FlxG.sound.play("assets/sounds/" + FlxG.random.getObject(shoutSounds), 1.5);
     }
 }

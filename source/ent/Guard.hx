@@ -76,22 +76,13 @@ class Guard extends FlxExtendedSprite {
 
     private function updateFacing()
     {
-        if (velocity.x > 0)
+        if (Math.abs(velocity.x) > Math.abs(velocity.y))
         {
-            facing = FlxObject.RIGHT;
+            facing = velocity.x > 0 ? FlxObject.RIGHT : FlxObject.LEFT;
         }
-        else if (velocity.x < 0)
+        else if (velocity.y != 0)
         {
-            facing = FlxObject.LEFT;
-        }
-
-        if (velocity.y > 0)
-        {
-            facing = FlxObject.DOWN;
-        }
-        else if (velocity.y < 0)
-        {
-            facing = FlxObject.UP;
+            facing = velocity.y > 0 ? FlxObject.DOWN : FlxObject.UP;
         }
 
         if (facing == FlxObject.LEFT)

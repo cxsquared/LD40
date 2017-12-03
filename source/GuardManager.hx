@@ -54,6 +54,10 @@ class GuardManager {
                     if (curGuard.seesPlayer)
                     {
                         path = tilemap.findPath(guardPoint, playerPoint);
+                        if (FlxG.random.bool(.75))
+                        {
+                            SoundManager.getInstance().playShout();
+                        }
                     }
                     else
                     {
