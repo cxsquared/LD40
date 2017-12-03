@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="8" tileheight="8" nextobjectid="119">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="8" tileheight="8" nextobjectid="120">
  <tileset firstgid="1" name="LD40" tilewidth="8" tileheight="8" tilecount="8" columns="4">
   <image source="tileMap.png" width="32" height="16"/>
  </tileset>
@@ -160,5 +160,6 @@
     <property name="coins" value="25"/>
    </properties>
   </object>
+  <object id="119" x="264.75" y="368.063" width="6.5" height="5.6875"/>
  </objectgroup>
 </map>

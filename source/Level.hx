@@ -153,7 +153,7 @@ class Level extends TiledMap {
     {
         FlxG.collide(guardGroup, collisionGroup);
         FlxG.collide(player , collisionGroup);
-        FlxG.collide(guardGroup, player);
+        FlxG.overlap(player, guardGroup, playerGuardOverlap);
 
         FlxG.overlap(player, coinGroup, playerCoinsOverlap);
         if (FlxG.state.subState == null)
@@ -173,6 +173,22 @@ class Level extends TiledMap {
             var subState = new SafeMiniGame(safe, FlxColor.fromRGB(0, 0, 0, 200));
             Player.canMove = false;
             FlxG.state.openSubState(subState);
+        }
+    }
+
+    private function playerGuardOverlap(HitPlayer:FlxObject, Guard:FlxObject):Void {
+        var guard:Guard = cast Guard;
+        if (!player.knockedOut && !guard.knockedOut)
+        {
+            Player.canMove = false;
+            player.knockedOut = true;
+            guard.knockOut();
+            guard.canMove = false;
+            Player.coins = Math.floor(Player.coins * .66);
+            var playState:PlayState = cast FlxG.state;
+            playState.addDust(HitPlayer.x, HitPlayer.y, player);
+            playState.addDust(guard.x, guard.y);
+            player.velocity.set(0, 0);
         }
     }
 

@@ -1,5 +1,6 @@
 package ;
 
+import flixel.util.FlxCollision;
 import flixel.math.FlxMath;
 import flixel.math.FlxAngle;
 import flixel.math.FlxPoint;
@@ -30,45 +31,43 @@ class GuardManager {
             var curGuard:Guard = cast guard;
             var guardPoint = FlxPoint.get(curGuard.x + curGuard.width/2, curGuard.y + curGuard.height/2);
 
-            if (Math.abs(FlxMath.distanceBetween(curGuard, player)) <= curGuard.seeDistance)
+            if (!FlxCollision.pixelPerfectCheck(player, curGuard) && !curGuard.knockedOut)
             {
-                var hitPoint = new FlxPoint();
-                if (tilemap.ray(guardPoint, playerPoint, hitPoint))
+                if (Math.abs(FlxMath.distanceBetween(curGuard, player)) <= curGuard.seeDistance)
                 {
-                    curGuard.seesPlayer = true;
+                    var hitPoint = new FlxPoint();
+                    if (tilemap.ray(guardPoint, playerPoint, hitPoint))
+                    {
+                        curGuard.seesPlayer = true;
+                    }
+                    else {
+                        curGuard.seesPlayer = false;
+                    }
                 }
                 else {
                     curGuard.seesPlayer = false;
                 }
-            }
-            else {
-                curGuard.seesPlayer = false;
-            }
 
-            if (curGuard.canMove || curGuard.seesPlayer)
-            {
-                var path:Array<FlxPoint> = null;
-                if (curGuard.seesPlayer)
+                if (curGuard.canMove || curGuard.seesPlayer)
                 {
-                    path = tilemap.findPath(guardPoint, playerPoint);
-                }
-                else
-                {
-                    var tryPoint = FlxAngle.getCartesianCoords(curGuard.seeDistance, FlxG.random.float(0, 360));
-                    tryPoint.addPoint(guardPoint);
-                    if (tilemap.ray(guardPoint, tryPoint))
+                    var path:Array<FlxPoint> = null;
+                    if (curGuard.seesPlayer)
                     {
-                        path = tilemap.findPath(guardPoint, tryPoint);
+                        path = tilemap.findPath(guardPoint, playerPoint);
                     }
-                }
+                    else
+                    {
+                        var tryPoint = FlxAngle.getCartesianCoords(curGuard.seeDistance, FlxG.random.float(0, 360));
+                        tryPoint.addPoint(guardPoint);
+                        if (tilemap.ray(guardPoint, tryPoint))
+                        {
+                            path = tilemap.findPath(guardPoint, tryPoint);
+                        }
+                    }
 
-                if (path == null)
-                {
-                    FlxG.log.add("path failed");
-                }
-                else {
-                    FlxG.log.add("Startign path");
-                    curGuard.move(path);
+                    if (path != null){
+                        curGuard.move(path);
+                    }
                 }
             }
         }

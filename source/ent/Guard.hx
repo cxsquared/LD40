@@ -2,7 +2,6 @@ package ent;
 
 import flixel.math.FlxPoint;
 import flixel.util.FlxTimer;
-import flixel.math.FlxMath;
 import flixel.FlxG;
 import flixel.util.FlxPath;
 import flixel.addons.display.FlxExtendedSprite;
@@ -16,22 +15,28 @@ class Guard extends FlxExtendedSprite {
     public var canMove = true;
 
     private var moveTimer:FlxTimer;
-    private var seePlayerTimer:FlxTimer;
+    private var knockOutTimer:FlxTimer;
 
     private var moveWait:Float = 2.5;
     private var moveWaitOffset:Float = 2;
+    private var knockWait:Float = 2;
+    private var knockWaitOffset:Float = 3;
+    public var knockedOut = false;
 
     public function new(X:Float, Y:Float) {
         super(X, Y);
 
         path = new FlxPath();
         moveTimer = new FlxTimer();
-        seePlayerTimer = new FlxTimer();
+        knockOutTimer = new FlxTimer();
 
         loadGraphic("assets/images/guard.png", true, 8, 8);
 
         animation.add("walking", [1,2], 6);
         animation.add("idle", [0]);
+        animation.add("knocked", [3, 4, 5], 12, true);
+
+        animation.play("idle");
     }
 
     public function move(nodes:Array<FlxPoint>):Void {
@@ -42,16 +47,12 @@ class Guard extends FlxExtendedSprite {
     public override function update(elapsed:Float):Void {
         super.update(elapsed);
 
-        if (path.active)
+        if (path.active && animation.curAnim.name != "walking" && !knockedOut)
         {
             animation.play("walking");
         }
-        else
-        {
-            animation.play("idle");
-        }
 
-        if (path.finished && (canMove = false || !moveTimer.active))
+        if (path.finished && !moveTimer.active && !knockedOut)
         {
             if (seesPlayer)
             {
@@ -59,13 +60,34 @@ class Guard extends FlxExtendedSprite {
             }
             else
             {
-                moveTimer.start(FlxG.random.float(0, moveWaitOffset) + moveWait, resetMove);
+                moveTimer.start(FlxG.random.float(-moveWaitOffset, moveWaitOffset) + moveWait, resetMove);
             }
         }
         FlxG.watch.addQuick("GuardPath", path.nodes);
     }
 
+    public function knockOut()
+    {
+        FlxG.log.add("Guard knocked");
+        knockedOut = true;
+        path.cancel();
+        moveTimer.cancel();
+        animation.play("knocked");
+        knockOutTimer.start(FlxG.random.float(0, knockWaitOffset) + knockWait, finishedKnocked);
+        canMove = false;
+    }
+
     private function resetMove(t:FlxTimer):Void {
-        canMove = true;
+        if (!knockedOut)
+        {
+            canMove = true;
+        }
+    }
+
+    private function finishedKnocked(t:FlxTimer):Void {
+        FlxG.log.add("Guard not knocked");
+        knockedOut = false;
+        animation.play("idle");
+        moveTimer.start(FlxG.random.float(-moveWaitOffset, moveWaitOffset) + moveWait, resetMove);
     }
 }

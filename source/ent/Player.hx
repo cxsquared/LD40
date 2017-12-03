@@ -16,6 +16,7 @@ class Player extends FlxExtendedSprite {
     public static var coins:Int = 0;
     public var light:Light;
     public static var canMove = true;
+    public var knockedOut = false;
 
     public function new(X:Float, Y:Float, Graphics:Dynamic, Darkness:FlxSprite) {
         super(X, Y);

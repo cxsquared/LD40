@@ -1,8 +1,10 @@
 package;
 
+import ent.Guard;
+import ent.Player;
+import ent.Dust;
 import flixel.util.FlxColor;
 import flixel.util.FlxSpriteUtil;
-import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.FlxState;
 
@@ -43,5 +45,10 @@ class PlayState extends FlxState
     override public function draw():Void {
         FlxSpriteUtil.fill(level.darkness, FlxColor.BLACK);
         super.draw();
+    }
+
+    public function addDust(X:Float, Y:Float, ?player:Player)
+    {
+        add(new Dust(X, Y, player));
     }
 }

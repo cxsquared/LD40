@@ -1,6 +1,5 @@
 package ;
 import flixel.util.FlxColor;
-import flixel.util.FlxColor;
 import ent.Safe;
 import ent.Player;
 import flixel.input.keyboard.FlxKey;
