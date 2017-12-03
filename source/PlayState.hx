@@ -36,6 +36,9 @@ class PlayState extends FlxState
         super.create();
 
         openSubState(new UiPopUp("Okay just need to get in, get to the master safe, and get out. Let's not get too greedy."));
+
+        Player.coins = 0;
+        Player.win = false;
 	}
 
 	override public function update(elapsed:Float):Void
@@ -43,6 +46,11 @@ class PlayState extends FlxState
         level.update(elapsed);
 		super.update(elapsed);
         guardManager.update(elapsed);
+
+        if (Player.win && subState == null)
+        {
+           FlxG.switchState(new Success());
+        }
 	}
 
     override public function draw():Void {

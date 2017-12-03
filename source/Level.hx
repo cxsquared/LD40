@@ -175,7 +175,7 @@ class Level extends TiledMap {
         player.pickUpCoin(cast Coin);
     }
 
-    private function playerDoorOverlap(Player:FlxObject, Door:FlxObject):Void {
+    private function playerDoorOverlap(HitPlayer:FlxObject, Door:FlxObject):Void {
         var door:Door = cast Door;
         if (door.canInteract)
         {
@@ -186,6 +186,7 @@ class Level extends TiledMap {
                 FlxG.state.openSubState(new UiPopUp("Time to get out of here!"));
                 door.immovable = false;
                 door.kill();
+                Player.win = true;
             }
             else
             {
@@ -214,6 +215,10 @@ class Level extends TiledMap {
             player.knockedOut = true;
             guard.knockOut();
             guard.canMove = false;
+            if (Player.coins == 0)
+            {
+                FlxG.switchState(new GameOver());
+            }
             Player.coins = Math.floor(Player.coins * .66);
             var playState:PlayState = cast FlxG.state;
             playState.addDust(HitPlayer.x, HitPlayer.y, player);

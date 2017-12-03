@@ -28,11 +28,13 @@ class Player extends FlxExtendedSprite {
     public var bag:FlxSprite;
     private var bagFollow = 15;
     private var maxCoins = 350;
-    private var maxBagScale = 6;
+    private var maxBagScale = 3;
     private var minSpeed = 25;
     private var maxSpeed = 100;
 
     public var canLeave = false;
+
+    public static var win = false;
 
     public function new(X:Float, Y:Float, Graphics:Dynamic, Darkness:FlxSprite) {
         super(X, Y);

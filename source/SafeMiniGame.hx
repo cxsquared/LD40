@@ -14,6 +14,8 @@ class SafeMiniGame extends FlxSubState {
     private var currCombo = 0;
     private var movingRight = false;
     private var tollerance = 2;
+    private var rightArrow:FlxSprite;
+    private var leftArrow:FlxSprite;
 
     private var safe:Safe;
 
@@ -47,6 +49,18 @@ class SafeMiniGame extends FlxSubState {
         dial.x = FlxG.camera.scroll.x - dial.width/8;
         dial.y = FlxG.camera.scroll.y - dial.height/8;
         add(dial);
+
+        rightArrow = new FlxSprite(0, 0);
+        rightArrow.loadGraphic("assets/images/rightArrow.png");
+        rightArrow.scrollFactor.set(0, 0);
+        rightArrow.visible = false;
+        add(rightArrow);
+
+        leftArrow = new FlxSprite(0, 0);
+        leftArrow.loadGraphic("assets/images/leftArrow.png");
+        leftArrow.scrollFactor.set(0, 0);
+        leftArrow.visible = false;
+        add(leftArrow);
     }
 
     private function generateSafeCombo()
@@ -80,6 +94,8 @@ class SafeMiniGame extends FlxSubState {
         switch(currCombo)
         {
             case 0:
+                rightArrow.visible = false;
+                leftArrow.visible = true;
                 if (isWithin(getCurrentDialNumber(), safeCombo[0] - tollerance, safeCombo[0] + tollerance) && movingRight)
                 {
                     currCombo++;
@@ -87,6 +103,8 @@ class SafeMiniGame extends FlxSubState {
                 }
 
             case 1:
+                rightArrow.visible = true;
+                leftArrow.visible = false;
                 if (movingRight && !isWithin(getCurrentDialNumber(), safeCombo[0] - tollerance, safeCombo[0] + tollerance))
                 {
                     currCombo = 0;
@@ -100,6 +118,8 @@ class SafeMiniGame extends FlxSubState {
                 }
 
             case 2:
+                rightArrow.visible = false;
+                leftArrow.visible = true;
                 if (!movingRight && !isWithin(getCurrentDialNumber(), safeCombo[1] - tollerance, safeCombo[1] + tollerance))
                 {
                     currCombo = 0;
