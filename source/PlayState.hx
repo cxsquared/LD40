@@ -9,14 +9,17 @@ import flixel.FlxState;
 class PlayState extends FlxState
 {
 	var level:Level;
+    var guardManager:GuardManager;
 
 	override public function create():Void
 	{
         level = new Level("assets/maps/tileTest.tmx");
+        guardManager = new GuardManager(level.walls, level.player, level.guardGroup);
 
         add(level.backgroundGroup);
         add(level.coinGroup);
-        add(level.characterGroup);
+        add(level.guardGroup);
+        add(level.player);
 
         add(level.collisionGroup);
 
@@ -33,6 +36,7 @@ class PlayState extends FlxState
 	{
         level.update(elapsed);
 		super.update(elapsed);
+        guardManager.update(elapsed);
 	}
 
     override public function draw():Void {

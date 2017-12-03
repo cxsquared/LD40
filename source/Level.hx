@@ -1,4 +1,6 @@
 package ;
+import ent.Guard;
+import flixel.tile.FlxTilemap;
 import ent.Coin;
 import ent.Coin.Coin;
 import flixel.FlxCamera.FlxCameraFollowStyle;
@@ -25,7 +27,8 @@ class Level extends TiledMap {
     public var backgroundGroup:FlxTypedGroup<FlxTilemapExt>;
 
     public var collisionGroup:FlxTypedGroup<FlxObject>;
-    public var characterGroup:FlxTypedGroup<Player>;
+    public var guardGroup:FlxTypedGroup<Guard>;
+    public var walls:FlxTilemap;
     public var coinGroup:FlxTypedGroup<Coin>;
     public var player:Player;
 
@@ -38,7 +41,7 @@ class Level extends TiledMap {
 
         backgroundGroup = new FlxTypedGroup<FlxTilemapExt>();
 
-        characterGroup = new FlxTypedGroup<Player>();
+        guardGroup = new FlxTypedGroup<Guard>();
         coinGroup = new FlxTypedGroup<Coin>();
         collisionGroup = new FlxTypedGroup<FlxObject>();
 
@@ -63,10 +66,14 @@ class Level extends TiledMap {
 
             tilemap = new FlxTilemapExt();
             tilemap.loadMapFromArray(layer.tileArray, layer.width, layer.height, "assets/maps/" + tileset.imageSource, tileset.tileWidth, tileset.tileHeight, FlxTilemapAutoTiling.OFF, tileset.firstGID);
+            tilemap.setTileProperties(1, FlxObject.ANY);
+            tilemap.setTileProperties(2, FlxObject.NONE);
 
             tilemap.alpha = layer.opacity;
 
             backgroundGroup.add(tilemap);
+
+            walls = tilemap;
         }
 
         darkness = new FlxSprite(0, 0);
@@ -111,7 +118,6 @@ class Level extends TiledMap {
                     player = new Player(x, y, "assets/images/player.png", darkness);
                     player.setBoundsMap(bounds);
                     FlxG.camera.follow(player, FlxCameraFollowStyle.TOPDOWN_TIGHT, 2);
-                    characterGroup.add(player);
                 }
                 else
                     throw "There can't be more than one player";
@@ -124,19 +130,24 @@ class Level extends TiledMap {
                 FlxG.log.add("Parsing coin type " + type);
                 var coin:Coin = new Coin(x, y, Std.parseInt(type));
                 coinGroup.add(coin);
+
+            case "guard":
+                var guard:Guard = new Guard(x, y);
+                guardGroup.add(guard);
         }
     }
 
     public function update(elapsed:Float):Void
     {
         updateCollisions();
-        updateEventsOrder();
+        //updateEventsOrder();
     }
 
     public function updateCollisions():Void
     {
-        FlxG.collide(characterGroup, collisionGroup);
-        FlxG.collide(characterGroup, characterGroup);
+        FlxG.collide(guardGroup, collisionGroup);
+        FlxG.collide(player , collisionGroup);
+        FlxG.collide(guardGroup, player);
 
         FlxG.overlap(player, coinGroup, playerCoinsOverlap);
     }
@@ -147,6 +158,6 @@ class Level extends TiledMap {
 
     public function updateEventsOrder()
     {
-        characterGroup.sort(FlxSort.byY);
+        guardGroup.sort(FlxSort.byY);
     }
 }

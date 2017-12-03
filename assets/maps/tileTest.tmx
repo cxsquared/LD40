@@ -3,7 +3,7 @@
  <tileset firstgid="1" name="LD40" tilewidth="8" tileheight="8" tilecount="8" columns="4">
   <image source="tileMap.png" width="32" height="16"/>
  </tileset>
- <layer name="bg" width="64" height="64">
+ <layer name="floor" width="64" height="64">
   <properties>
    <property name="tileset" value="LD40"/>
   </properties>
@@ -39,8 +39,8 @@
   <object id="34" type="collision" x="456" y="368.667" width="22" height="7.33333"/>
   <object id="35" type="collision" x="463.333" y="360.667" width="16.6667" height="7.33333"/>
   <object id="36" type="collision" x="472" y="352.667" width="8" height="7.33333"/>
-  <object id="37" type="collision" x="423.333" y="328" width="25.3333" height="5.33333"/>
-  <object id="38" type="collision" x="430.667" y="312" width="40" height="16"/>
+  <object id="37" type="collision" x="424.146" y="328" width="23.5833" height="7.52083"/>
+  <object id="38" type="collision" x="433.417" y="312" width="37.25" height="16"/>
   <object id="39" type="collision" x="440" y="296.667" width="31.3333" height="14.6667"/>
   <object id="40" type="collision" x="448" y="96" width="22.6667" height="198.667"/>
   <object id="41" type="collision" x="472" y="129.333" width="8" height="119.333"/>
@@ -95,7 +95,7 @@
   <object id="96" type="collision" x="288" y="232" width="16" height="16"/>
   <object id="98" type="collision" x="304" y="232" width="128" height="8"/>
   <object id="99" type="collision" x="392" y="240" width="40" height="24"/>
-  <object id="100" type="collision" x="392" y="264" width="32" height="48"/>
+  <object id="100" type="collision" x="392" y="264" width="30.3125" height="47.8125"/>
   <object id="101" type="collision" x="400" y="312" width="16" height="8"/>
   <object id="102" type="collision" x="408" y="320" width="8"/>
   <object id="103" type="collision" x="408" y="320" width="8" height="8"/>

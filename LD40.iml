@@ -2,7 +2,7 @@
 <module type="HAXE_MODULE" version="4">
   <component name="HaxeModuleSettingsStorage">
     <option name="buildConfig" value="3" />
-    <option name="flexSdkName" value="flex_4.6" />
+    <option name="flexSdkName" value="apache-flex-sdk-4.16.1-bin" />
     <option name="outputFolder" value="$MODULE_DIR$/export" />
   </component>
   <component name="NewModuleRootManager">
@@ -15,7 +15,7 @@
     <orderEntry type="jdk" jdkName="Haxe 3.4.2" jdkType="Haxe toolkit" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Flixel Engine" level="application" />
-    <orderEntry type="library" name="Flixel Addons" level="application" />
+    <orderEntry type="library" exported="" name="Flixel Addons" level="application" />
     <orderEntry type="library" name="OpenFl" level="application" />
     <orderEntry type="module-library" scope="PROVIDED">
       <library name="haxelib|openfl:any">
