@@ -37,12 +37,16 @@ class SafeMiniGame extends FlxSubState {
 
         var bg = new FlxSprite(FlxG.camera.scroll.x, FlxG.camera.scroll.y);
         bg.loadGraphic("assets/images/safeDialBackground.png");
-        bg.scale.x = bg.scale.y = .75;
+        bg.scale.x = bg.scale.y = .5;
+        bg.x = FlxG.camera.scroll.x - bg.width/8;
+        bg.y = FlxG.camera.scroll.y - bg.height/8;
         add(bg);
 
         dial = new FlxSprite(FlxG.camera.scroll.x, FlxG.camera.scroll.y);
         dial.loadGraphic("assets/images/safeDialCenter.png");
-        dial.scale.x = dial.scale.y = .75;
+        dial.scale.x = dial.scale.y = .5;
+        dial.x = FlxG.camera.scroll.x - dial.width/8;
+        dial.y = FlxG.camera.scroll.y - dial.height/8;
         add(dial);
     }
 
@@ -73,18 +77,30 @@ class SafeMiniGame extends FlxSubState {
         {
             case 0:
                 if (isWithin(getCurrentDialNumber(), safeCombo[0] - tollerance, safeCombo[0] + tollerance) && movingRight)
+                {
                     currCombo++;
+                    FlxG.camera.shake(0.0075, 0.25);
+                }
 
             case 1:
                 if (movingRight && !isWithin(getCurrentDialNumber(), safeCombo[0] - tollerance, safeCombo[0] + tollerance))
+                {
                     currCombo = 0;
+                    FlxG.camera.shake(0.1);
+                }
 
                 if (!movingRight && isWithin(getCurrentDialNumber(), safeCombo[1] - tollerance, safeCombo[1] + tollerance))
+                {
                     currCombo++;
+                    FlxG.camera.shake(0.0075, 0.25);
+                }
 
             case 2:
                 if (!movingRight && !isWithin(getCurrentDialNumber(), safeCombo[1] - tollerance, safeCombo[1] + tollerance))
+                {
                     currCombo = 0;
+                    FlxG.camera.shake(0.1);
+                }
 
                 if (movingRight && isWithin(getCurrentDialNumber(), safeCombo[2] - tollerance, safeCombo[2] + tollerance))
                 {
