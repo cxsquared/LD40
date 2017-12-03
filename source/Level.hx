@@ -33,6 +33,7 @@ class Level extends TiledMap {
     public var coinGroup:FlxTypedGroup<Coin>;
     public var safeGroup:FlxTypedGroup<Safe>;
     public var player:Player;
+    public var tileMap:FlxTilemap;
 
     public var darkness:FlxSprite;
 
@@ -69,10 +70,13 @@ class Level extends TiledMap {
 
             tilemap = new FlxTilemapExt();
             tilemap.loadMapFromArray(layer.tileArray, layer.width, layer.height, "assets/maps/" + tileset.imageSource, tileset.tileWidth, tileset.tileHeight, FlxTilemapAutoTiling.OFF, tileset.firstGID);
-            tilemap.setTileProperties(1, FlxObject.ANY);
-            tilemap.setTileProperties(2, FlxObject.NONE);
+            tilemap.setTileProperties(1, FlxObject.ANY, 38);
+            tilemap.setTileProperties(39, FlxObject.NONE, 9);
 
             tilemap.alpha = layer.opacity;
+            tileMap = tilemap;
+
+            FlxG.log.add("Tilemap " + tilemap.getData(false));
 
             backgroundGroup.add(tilemap);
 
@@ -151,8 +155,10 @@ class Level extends TiledMap {
 
     public function updateCollisions():Void
     {
-        FlxG.collide(guardGroup, collisionGroup);
-        FlxG.collide(player , collisionGroup);
+        //FlxG.collide(guardGroup, collisionGroup);
+        //FlxG.collide(player , collisionGroup);
+        FlxG.collide(tileMap, player);
+        FlxG.collide(guardGroup, tileMap);
         FlxG.overlap(player, guardGroup, playerGuardOverlap);
 
         FlxG.overlap(player, coinGroup, playerCoinsOverlap);

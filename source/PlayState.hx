@@ -1,6 +1,5 @@
 package;
 
-import ent.Guard;
 import ent.Player;
 import ent.Dust;
 import flixel.util.FlxColor;

@@ -55,6 +55,10 @@ class SafeMiniGame extends FlxSubState {
     }
 
     override public function update(elapsed:Float):Void {
+        if (FlxG.keys.anyPressed([FlxKey.ESCAPE])) {
+            close();
+        }
+
         super.update(elapsed);
 
         FlxG.watch.addQuick("Dial Combo", safeCombo);
