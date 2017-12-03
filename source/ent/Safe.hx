@@ -1,6 +1,5 @@
 package ent;
 import flixel.math.FlxMath;
-import flixel.util.FlxCollision;
 import flixel.addons.display.FlxExtendedSprite;
 class Safe extends FlxExtendedSprite {
 
@@ -17,9 +16,18 @@ class Safe extends FlxExtendedSprite {
         loadGraphic("assets/images/safe.png", true, 8, 8);
 
         animation.add("closed", [0], 1, false);
-        animation.add("opend", [1], 1, false);
+        animation.add("opened", [1], 1, false);
+        animation.add("door", [2], 1, false);
 
-        animation.play("closed");
+        if (coins > 0)
+        {
+            animation.play("closed");
+        }
+        else
+        {
+            immovable = true;
+            animation.play("door");
+        }
     }
 
     override public function update(elapsed:Float):Void
@@ -30,6 +38,19 @@ class Safe extends FlxExtendedSprite {
         {
             canOpen = true;
             player = null;
+        }
+    }
+
+    public function open()
+    {
+        if (coins > 0)
+        {
+            animation.play("opened");
+            opened = true;
+        }
+        else {
+            immovable = false;
+            kill();
         }
     }
 }

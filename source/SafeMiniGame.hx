@@ -108,7 +108,7 @@ class SafeMiniGame extends FlxSubState {
 
                 if (movingRight && isWithin(getCurrentDialNumber(), safeCombo[2] - tollerance, safeCombo[2] + tollerance))
                 {
-                    safe.opened = true;
+                    safe.open();
                     close();
                     Player.coins += safe.coins;
                     Player.canMove = true;

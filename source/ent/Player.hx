@@ -44,7 +44,7 @@ class Player extends FlxExtendedSprite {
         setFacingFlip(FlxObject.RIGHT, true, false);
         setFacingFlip(FlxObject.DOWN, false, false);
 
-        collisionMap = new FlxRect(0, 0, 8, 8);
+        collisionMap = new FlxRect(0, 0, 6, 6);
 
         facing = FlxObject.DOWN;
 
@@ -58,6 +58,8 @@ class Player extends FlxExtendedSprite {
 
         bag = new FlxSprite(X, Y);
         bag.loadGraphic("assets/images/bag.png");
+
+        setSize(6, 6);
     }
 
     override public function update(elapsed:Float):Void {
