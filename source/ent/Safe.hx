@@ -50,6 +50,7 @@ class Safe extends FlxExtendedSprite {
         }
         else {
             immovable = false;
+            player.canLeave = true;
             kill();
         }
     }

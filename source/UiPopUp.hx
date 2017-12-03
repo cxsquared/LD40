@@ -1,5 +1,6 @@
 package ;
 
+import ent.Player;
 import flixel.util.FlxTimer;
 import flixel.FlxSubState;
 import flixel.input.keyboard.FlxKey;
@@ -23,6 +24,7 @@ class UiPopUp extends FlxSubState {
         super();
         text = Text;
 
+        Player.canMove = false;
     }
 
     override public function create()
@@ -55,6 +57,7 @@ class UiPopUp extends FlxSubState {
         if (isTextFinished && FlxG.keys.justPressed.SPACE)
         {
             close();
+            Player.canMove = true;
         }
     }
 

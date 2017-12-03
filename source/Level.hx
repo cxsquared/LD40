@@ -1,4 +1,5 @@
 package ;
+import ent.Door;
 import ent.Safe;
 import ent.Guard;
 import flixel.tile.FlxTilemap;
@@ -31,6 +32,7 @@ class Level extends TiledMap {
     public var guardGroup:FlxTypedGroup<Guard>;
     public var walls:FlxTilemap;
     public var coinGroup:FlxTypedGroup<Coin>;
+    public var lastDoor:Door;
     public var safeGroup:FlxTypedGroup<Safe>;
     public var player:Player;
     public var tileMap:FlxTilemap;
@@ -141,6 +143,9 @@ class Level extends TiledMap {
 
             case "safe":
                 safeGroup.add(new Safe(x, y, Std.parseInt(Obj.properties.get("coins"))));
+
+            case "door":
+                lastDoor = new Door(x, y);
         }
     }
 
@@ -157,6 +162,7 @@ class Level extends TiledMap {
         FlxG.collide(tileMap, player);
         FlxG.collide(guardGroup, tileMap);
         FlxG.overlap(player, guardGroup, playerGuardOverlap);
+        FlxG.collide(player, lastDoor, playerDoorOverlap);
 
         FlxG.overlap(player, coinGroup, playerCoinsOverlap);
         if (FlxG.state.subState == null)
@@ -167,6 +173,25 @@ class Level extends TiledMap {
 
     private function playerCoinsOverlap(Player:FlxObject, Coin:FlxObject):Void {
         player.pickUpCoin(cast Coin);
+    }
+
+    private function playerDoorOverlap(Player:FlxObject, Door:FlxObject):Void {
+        var door:Door = cast Door;
+        if (door.canInteract)
+        {
+            door.canInteract = false;
+            door.player = player;
+            if (player.canLeave)
+            {
+                FlxG.state.openSubState(new UiPopUp("Time to get out of here!"));
+                door.immovable = false;
+                door.kill();
+            }
+            else
+            {
+                FlxG.state.openSubState(new UiPopUp("I need to get to the master safe first."));
+            }
+        }
     }
 
     private function playerSafeOverlap(HitPlayer:FlxObject, Safe:FlxObject):Void {

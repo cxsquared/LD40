@@ -25,6 +25,7 @@ class PlayState extends FlxState
         add(level.player.bag);
 
         add(level.collisionGroup);
+        add(level.lastDoor);
 
         add(level.player.light);
         add(level.darkness);

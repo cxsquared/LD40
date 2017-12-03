@@ -32,6 +32,8 @@ class Player extends FlxExtendedSprite {
     private var minSpeed = 25;
     private var maxSpeed = 100;
 
+    public var canLeave = false;
+
     public function new(X:Float, Y:Float, Graphics:Dynamic, Darkness:FlxSprite) {
         super(X, Y);
 
