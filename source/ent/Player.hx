@@ -181,6 +181,7 @@ class Player extends FlxExtendedSprite {
     public function pickUpCoin(coin:Coin): Void
     {
         coins += coin.getNumberOfCoins();
+        SoundManager.getInstance().playCoin();
         coin.destroy();
     }
 }
