@@ -219,6 +219,7 @@ class Level extends TiledMap {
             {
                 FlxG.switchState(new GameOver());
             }
+            SoundManager.getInstance().playFight();
             Player.coins = Math.floor(Player.coins * .66);
             var playState:PlayState = cast FlxG.state;
             playState.addDust(HitPlayer.x, HitPlayer.y, player);
@@ -226,6 +227,7 @@ class Level extends TiledMap {
             player.velocity.set(0, 0);
             if (Type.getClass(FlxG.state.subState) == SafeMiniGame)
             {
+                SoundManager.getInstance().stopSafeLoop();
                 FlxG.state.subState.close();
             }
         }

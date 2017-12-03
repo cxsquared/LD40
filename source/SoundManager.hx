@@ -5,6 +5,7 @@ class SoundManager {
 
     private var coinSounds = ["Pickup_Coin.wav", "Pickup_Coin2.wav", "Pickup_Coin3.wav"];
     private var tumblerSounds =["tumblr01.wav", "tumblr02.wav", "tumblr03.wav"];
+    private var fightSounds = ["fight01.wav", "fight02.wav", "fight03.wav"];
     private var safeLoop:FlxSound;
 
     private static var intance:SoundManager;
@@ -24,7 +25,7 @@ class SoundManager {
 
     public function playCoin()
     {
-        FlxG.sound.play("assets/sounds/" + FlxG.random.getObject(coinSounds), 0.5);
+        FlxG.sound.play("assets/sounds/" + FlxG.random.getObject(coinSounds), 0.35);
     }
 
     public function playSafeDrop()
@@ -39,7 +40,7 @@ class SoundManager {
 
     public function playSafeSuccess()
     {
-        FlxG.sound.play("assets/sounds/safeSuccess.wav", 0.5);
+        FlxG.sound.play("assets/sounds/safeSuccess.wav", .75);
     }
 
     public function startSafeLoop()
@@ -56,5 +57,10 @@ class SoundManager {
     public function stopSafeLoop()
     {
         safeLoop.pause();
+    }
+
+    public function playFight()
+    {
+        FlxG.sound.play("assets/sounds/" + FlxG.random.getObject(fightSounds), 1.5);
     }
 }
