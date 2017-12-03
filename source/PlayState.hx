@@ -22,6 +22,7 @@ class PlayState extends FlxState
         add(level.safeGroup);
         add(level.guardGroup);
         add(level.player);
+        add(level.player.bag);
 
         add(level.collisionGroup);
 

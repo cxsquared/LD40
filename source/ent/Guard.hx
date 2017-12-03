@@ -1,5 +1,6 @@
 package ent;
 
+import flixel.FlxObject;
 import flixel.math.FlxPoint;
 import flixel.util.FlxTimer;
 import flixel.FlxG;
@@ -32,6 +33,11 @@ class Guard extends FlxExtendedSprite {
 
         loadGraphic("assets/images/guard.png", true, 8, 8);
 
+        setFacingFlip(FlxObject.UP, false, true);
+        setFacingFlip(FlxObject.LEFT, false, false);
+        setFacingFlip(FlxObject.RIGHT, true, false);
+        setFacingFlip(FlxObject.DOWN, false, false);
+
         animation.add("walking", [1,2], 6);
         animation.add("idle", [0]);
         animation.add("knocked", [3, 4, 5], 12, true);
@@ -46,6 +52,8 @@ class Guard extends FlxExtendedSprite {
 
     public override function update(elapsed:Float):Void {
         super.update(elapsed);
+
+        updateFacing();
 
         if (path.active && animation.curAnim.name != "walking" && !knockedOut)
         {
@@ -64,6 +72,40 @@ class Guard extends FlxExtendedSprite {
             }
         }
         FlxG.watch.addQuick("GuardPath", path.nodes);
+    }
+
+    private function updateFacing()
+    {
+        if (velocity.x > 0)
+        {
+            facing = FlxObject.RIGHT;
+        }
+        else if (velocity.x < 0)
+        {
+            facing = FlxObject.LEFT;
+        }
+
+        if (velocity.y > 0)
+        {
+            facing = FlxObject.DOWN;
+        }
+        else if (velocity.y < 0)
+        {
+            facing = FlxObject.UP;
+        }
+
+        if (facing == FlxObject.LEFT)
+        {
+            angle = 90;
+        }
+        else if (facing == FlxObject.RIGHT)
+        {
+            angle = 270;
+        }
+        else
+        {
+            angle = 0;
+        }
     }
 
     public function knockOut()
