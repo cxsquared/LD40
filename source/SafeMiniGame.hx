@@ -82,13 +82,18 @@ class SafeMiniGame extends FlxSubState {
 
         if (FlxG.keys.anyPressed([FlxKey.LEFT, FlxKey.A]))
         {
+            SoundManager.getInstance().startSafeLoop();
             rotateDial(rotationSpeed * elapsed);
             movingRight = true;
         }
         else if (FlxG.keys.anyPressed([FlxKey.RIGHT, FlxKey.D]))
         {
+            SoundManager.getInstance().startSafeLoop();
             rotateDial(-rotationSpeed * elapsed);
             movingRight = false;
+        }
+        else{
+            SoundManager.getInstance().stopSafeLoop();
         }
 
         switch(currCombo)
@@ -99,6 +104,7 @@ class SafeMiniGame extends FlxSubState {
                 if (isWithin(getCurrentDialNumber(), safeCombo[0] - tollerance, safeCombo[0] + tollerance) && movingRight)
                 {
                     currCombo++;
+                    SoundManager.getInstance().playSafeDrop();
                     FlxG.camera.shake(0.0075, 0.25);
                 }
 
@@ -107,12 +113,14 @@ class SafeMiniGame extends FlxSubState {
                 leftArrow.visible = false;
                 if (movingRight && !isWithin(getCurrentDialNumber(), safeCombo[0] - tollerance, safeCombo[0] + tollerance))
                 {
+                    SoundManager.getInstance().playSafeFail();
                     currCombo = 0;
                     FlxG.camera.shake(0.1);
                 }
 
                 if (!movingRight && isWithin(getCurrentDialNumber(), safeCombo[1] - tollerance, safeCombo[1] + tollerance))
                 {
+                    SoundManager.getInstance().playSafeDrop();
                     currCombo++;
                     FlxG.camera.shake(0.0075, 0.25);
                 }
@@ -122,12 +130,15 @@ class SafeMiniGame extends FlxSubState {
                 leftArrow.visible = true;
                 if (!movingRight && !isWithin(getCurrentDialNumber(), safeCombo[1] - tollerance, safeCombo[1] + tollerance))
                 {
+                    SoundManager.getInstance().playSafeFail();
                     currCombo = 0;
                     FlxG.camera.shake(0.1);
                 }
 
                 if (movingRight && isWithin(getCurrentDialNumber(), safeCombo[2] - tollerance, safeCombo[2] + tollerance))
                 {
+                    SoundManager.getInstance().stopSafeLoop();
+                    SoundManager.getInstance().playSafeSuccess();
                     safe.open();
                     close();
                     Player.coins += safe.coins;
