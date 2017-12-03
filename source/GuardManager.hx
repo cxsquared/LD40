@@ -1,8 +1,6 @@
 package ;
 
-import flixel.math.FlxRandom;
 import flixel.math.FlxMath;
-import flixel.math.FlxVector;
 import flixel.math.FlxAngle;
 import flixel.math.FlxPoint;
 import flixel.FlxG;

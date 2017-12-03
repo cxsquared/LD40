@@ -13,8 +13,9 @@ class Player extends FlxExtendedSprite {
     private var collisionMap:FlxRect;
     private var maxBounds:FlxRect;
     private var coinMultiplyer = 5;
-    public var coins:Int;
+    public static var coins:Int = 0;
     public var light:Light;
+    public static var canMove = true;
 
     public function new(X:Float, Y:Float, Graphics:Dynamic, Darkness:FlxSprite) {
         super(X, Y);
@@ -42,28 +43,33 @@ class Player extends FlxExtendedSprite {
     }
 
     override public function update(elapsed:Float):Void {
+        FlxG.watch.addQuick("Coins", Player.coins);
+
         acceleration.set(0, 0);
 
-        if (FlxG.keys.anyPressed([FlxKey.RIGHT, FlxKey.D]))
+        if (canMove)
         {
-            acceleration.x = drag.x;
-            facing = FlxObject.RIGHT;
-        }
-        else if (FlxG.keys.anyPressed([FlxKey.LEFT, FlxKey.A]))
-        {
-            acceleration.x = -drag.x;
-            facing = FlxObject.LEFT;
-        }
+            if (FlxG.keys.anyPressed([FlxKey.RIGHT, FlxKey.D]))
+            {
+                acceleration.x = drag.x;
+                facing = FlxObject.RIGHT;
+            }
+            else if (FlxG.keys.anyPressed([FlxKey.LEFT, FlxKey.A]))
+            {
+                acceleration.x = -drag.x;
+                facing = FlxObject.LEFT;
+            }
 
-        if (FlxG.keys.anyPressed([FlxKey.UP, FlxKey.W]))
-        {
-            acceleration.y = -drag.y;
-            facing = FlxObject.UP;
-        }
-        else if (FlxG.keys.anyPressed([FlxKey.DOWN, FlxKey.S]))
-        {
-            acceleration.y = drag.y;
-            facing = FlxObject.DOWN;
+            if (FlxG.keys.anyPressed([FlxKey.UP, FlxKey.W]))
+            {
+                acceleration.y = -drag.y;
+                facing = FlxObject.UP;
+            }
+            else if (FlxG.keys.anyPressed([FlxKey.DOWN, FlxKey.S]))
+            {
+                acceleration.y = drag.y;
+                facing = FlxObject.DOWN;
+            }
         }
         checkBoundsMap();
 

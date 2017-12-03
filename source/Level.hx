@@ -1,4 +1,5 @@
 package ;
+import ent.Safe;
 import ent.Guard;
 import flixel.tile.FlxTilemap;
 import ent.Coin;
@@ -30,6 +31,7 @@ class Level extends TiledMap {
     public var guardGroup:FlxTypedGroup<Guard>;
     public var walls:FlxTilemap;
     public var coinGroup:FlxTypedGroup<Coin>;
+    public var safeGroup:FlxTypedGroup<Safe>;
     public var player:Player;
 
     public var darkness:FlxSprite;
@@ -43,6 +45,7 @@ class Level extends TiledMap {
 
         guardGroup = new FlxTypedGroup<Guard>();
         coinGroup = new FlxTypedGroup<Coin>();
+        safeGroup = new FlxTypedGroup<Safe>();
         collisionGroup = new FlxTypedGroup<FlxObject>();
 
         bounds = FlxRect.get(0, 0, fullWidth, fullHeight);
@@ -134,6 +137,9 @@ class Level extends TiledMap {
             case "guard":
                 var guard:Guard = new Guard(x, y);
                 guardGroup.add(guard);
+
+            case "safe":
+                safeGroup.add(new Safe(x, y, Std.parseInt(Obj.properties.get("coins"))));
         }
     }
 
@@ -150,10 +156,24 @@ class Level extends TiledMap {
         FlxG.collide(guardGroup, player);
 
         FlxG.overlap(player, coinGroup, playerCoinsOverlap);
+        if (FlxG.state.subState == null)
+        {
+            FlxG.overlap(player, safeGroup, playerSafeOverlap);
+        }
     }
 
     private function playerCoinsOverlap(Player:FlxObject, Coin:FlxObject):Void {
         player.pickUpCoin(cast Coin);
+    }
+
+    private function playerSafeOverlap(HitPlayer:FlxObject, Safe:FlxObject):Void {
+        var safe:Safe = cast Safe;
+        if (!safe.opened)
+        {
+            var subState = new SafeMiniGame(safe, FlxColor.fromRGB(0, 0, 0, 200));
+            Player.canMove = false;
+            FlxG.state.openSubState(subState);
+        }
     }
 
     public function updateEventsOrder()

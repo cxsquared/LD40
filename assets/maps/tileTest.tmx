@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="8" tileheight="8" nextobjectid="118">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="8" tileheight="8" nextobjectid="119">
  <tileset firstgid="1" name="LD40" tilewidth="8" tileheight="8" tilecount="8" columns="4">
   <image source="tileMap.png" width="32" height="16"/>
  </tileset>
@@ -39,7 +39,7 @@
   <object id="34" type="collision" x="456" y="368.667" width="22" height="7.33333"/>
   <object id="35" type="collision" x="463.333" y="360.667" width="16.6667" height="7.33333"/>
   <object id="36" type="collision" x="472" y="352.667" width="8" height="7.33333"/>
-  <object id="37" type="collision" x="424.146" y="328" width="23.5833" height="7.52083"/>
+  <object id="37" type="collision" x="424.146" y="328" width="23.9583" height="7.77083"/>
   <object id="38" type="collision" x="433.417" y="312" width="37.25" height="16"/>
   <object id="39" type="collision" x="440" y="296.667" width="31.3333" height="14.6667"/>
   <object id="40" type="collision" x="448" y="96" width="22.6667" height="198.667"/>
@@ -153,6 +153,11 @@
   <object id="117" type="coin" x="150" y="298.667" width="8" height="8">
    <properties>
     <property name="coinType" value="1"/>
+   </properties>
+  </object>
+  <object id="118" type="safe" x="264" y="368" width="8" height="8">
+   <properties>
+    <property name="coins" value="25"/>
    </properties>
   </object>
  </objectgroup>
