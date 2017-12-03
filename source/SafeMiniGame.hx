@@ -55,7 +55,8 @@ class SafeMiniGame extends FlxSubState {
     }
 
     override public function update(elapsed:Float):Void {
-        if (FlxG.keys.anyPressed([FlxKey.ESCAPE])) {
+        if (FlxG.keys.anyPressed([FlxKey.SPACE])) {
+            Player.canMove = true;
             close();
         }
 

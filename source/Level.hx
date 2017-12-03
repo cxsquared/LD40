@@ -76,8 +76,6 @@ class Level extends TiledMap {
             tilemap.alpha = layer.opacity;
             tileMap = tilemap;
 
-            FlxG.log.add("Tilemap " + tilemap.getData(false));
-
             backgroundGroup.add(tilemap);
 
             walls = tilemap;
@@ -134,7 +132,6 @@ class Level extends TiledMap {
                     throw "Coin must have a value";
 
                 var type = Obj.properties.get("coinType");
-                FlxG.log.add("Parsing coin type " + type);
                 var coin:Coin = new Coin(x, y, Std.parseInt(type));
                 coinGroup.add(coin);
 
@@ -174,9 +171,11 @@ class Level extends TiledMap {
 
     private function playerSafeOverlap(HitPlayer:FlxObject, Safe:FlxObject):Void {
         var safe:Safe = cast Safe;
-        if (!safe.opened)
+        if (!safe.opened && safe.canOpen)
         {
             var subState = new SafeMiniGame(safe, FlxColor.fromRGB(0, 0, 0, 200));
+            safe.canOpen = false;
+            safe.player = player;
             Player.canMove = false;
             FlxG.state.openSubState(subState);
         }
@@ -195,6 +194,10 @@ class Level extends TiledMap {
             playState.addDust(HitPlayer.x, HitPlayer.y, player);
             playState.addDust(guard.x, guard.y);
             player.velocity.set(0, 0);
+            if (Type.getClass(FlxG.state.subState) == SafeMiniGame)
+            {
+                FlxG.state.subState.close();
+            }
         }
     }
 

@@ -11,7 +11,7 @@
    eJztW2tv3SAMRVs32lWr9m3TOu39yNob5f7/X7cgxZp3ZDvABUKafThKCMZwAINNkgfn3MOM83LlOC8YIY1yw4yJyUxCWtLN06OQdxLKTYDw7LcghzolfcSHt28QdJyF+gemA/meoe4Tyx+XtNSPUj9he0eme2KcpqUfpD6T+BMvase3GZ8YPkMaoeVb5XJ1xubHyn+HfgjXLzN+ReLljJsE+VzUque9+zvuNOc+dtCulvzR5vY6/n7GtZG2+AfutH7tlT/KxJS5Z/zHA/Ln9h+uJ4E/zaNnAqgOKY9wzfRYchw4d2vy5/umZP+k57UAK49wu+h5syIn6cU2WH2WU4avf+QXaPxbzn+NS06fWWUCf7J7sgHc/3riX2P+o7/Z8/jX4B/mPPfR98o/rC+3Rlrjj7HGXvnngOY/3wOPxJ/8Hyv+2Qt/7y7zf9f2/975l1r/j7j/0XlP7/5PTf6X2H+sX58CtOUaZYg/ncNJ8Z/Fn/bYWL8+BbiX1yjD4z8t/m0V424Bvv/T2ezR+POzYCv+qWHjpe0/FSnxTw0bL23/qbh3/57/pvq/FkK5VxnlagLbhP7feFD+3P5L8Y+JPwnerfvql8hrbUL+qf5PKaT0VY68hsAf33Mebf/Dd9Cl+HuXN0drAtsk8U+J/yyOKetfal/l9m3p9c+ywxT+rex/jX/J+b+X/Y/Wv5z49ynwJ/9fe//Xgr93fdj/VuO/lf3T+S/FviXj373Mf/79R+r7v6fEn87A1sbfu7jYmurqKf631v/Y8//YWPzSc4Ma8X/L+K/HuOE//7b73974Bx+w5Pq/N/61x987+x1t7bS1/lMMXJP/2jcardPk/4U+qBH/9Db/Eej/HJl/zvcPqfy929b+Mc3jX5r/Ndf/re0d28THv8X6tzXW9r/S8W+P/LXx1/h7lxezxcSN3tn2ie3APHoWdD1neun+SgDXgd+/SfxTYi/L1iQ9Kd/sSHkYY94Z95TG91+07mn+X6m5FiOTyz+3jTT/aex74S/Z1osK/Pn8197/tORPNnKnXPHMs9T4W+tfS/416ojl38P835I/4eeMDwxvIU14pzxHYHmrHMp+NWRRj9ZOq94fwH1Q7iUZvErl8N9mlD0pz+j+cSV/UJ5bcrTe47/lE1w1SP9r83L4j7hWlv9zqck8GvVq7dD+31+T+QPoeAHU
   </data>
  </layer>
- <objectgroup name="collision">
+ <objectgroup name="collision" visible="0">
   <object id="198" type="collision" x="16" y="488" width="280" height="8"/>
   <object id="201" type="collision" x="304" y="488" width="192" height="8"/>
   <object id="202" type="collision" x="16" y="16" width="479.333" height="8"/>

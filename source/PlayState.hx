@@ -32,6 +32,8 @@ class PlayState extends FlxState
         FlxG.worldBounds.copyFrom(level.bounds);
 
         super.create();
+
+        openSubState(new UiPopUp("Okay just need to get in, get to the master safe, and get out. Let's not get too greedy."));
 	}
 
 	override public function update(elapsed:Float):Void
