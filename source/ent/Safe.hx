@@ -1,4 +1,5 @@
 package ent;
+import flixel.FlxG;
 import flixel.math.FlxMath;
 import flixel.addons.display.FlxExtendedSprite;
 class Safe extends FlxExtendedSprite {
@@ -51,6 +52,7 @@ class Safe extends FlxExtendedSprite {
         else {
             immovable = false;
             player.canLeave = true;
+            FlxG.state.openSubState(new UiPopUp("Now just to grab the cash and leave."));
             kill();
         }
     }

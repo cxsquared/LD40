@@ -36,14 +36,16 @@ class UiPopUp extends FlxSubState {
         add(textBackground);
 
         textSprite = new FlxTypeText(0, 0, FlxG.width - 20, text);
+        textSprite.setFormat("assets/Bullio.ttf", 10);
         textSprite.alignment = FlxTextAlign.LEFT;
         textSprite.color = FlxColor.WHITE;
         textSprite.scrollFactor.set(0, 0);
         add(textSprite);
 
         textFinishedSprite = new FlxText(10, 0, FlxG.width - 20, "Press space...");
+        textFinishedSprite.setFormat("assets/Bullio.ttf");
         textFinishedSprite.visible = false;
-        textFinishedSprite.y = textBackground.height - 10 - textFinishedSprite.height;
+        textFinishedSprite.y = textBackground.height - textFinishedSprite.height;
         textFinishedSprite.scrollFactor.set(0, 0);
         add(textFinishedSprite);
 
