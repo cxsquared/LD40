@@ -75,7 +75,11 @@ class SoundManager {
     {
         if (FlxG.sound.music == null || !FlxG.sound.music.playing)
         {
+            #if desktop
+            FlxG.sound.playMusic("assets/music/music.ogg", .35);
+            #else
             FlxG.sound.playMusic("assets/music/music.mp3", .35);
+            #end
         }
     }
 

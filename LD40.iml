@@ -61,5 +61,16 @@
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="haxelib|hscript:2.1.1">
+        <CLASSES>
+          <root url="file://C:/HaxeToolkit/haxe/lib/hscript/2,1,1" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/HaxeToolkit/haxe/lib/hscript/2,1,1" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>
