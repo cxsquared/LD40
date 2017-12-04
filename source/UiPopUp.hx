@@ -1,5 +1,6 @@
 package ;
 
+import flixel.system.FlxSound;
 import ent.Player;
 import flixel.util.FlxTimer;
 import flixel.FlxSubState;
@@ -37,6 +38,11 @@ class UiPopUp extends FlxSubState {
 
         textSprite = new FlxTypeText(0, 0, FlxG.width - 20, text);
         textSprite.setFormat("assets/Bullio.ttf", 10);
+        textSprite.sounds = [new FlxSound().loadEmbedded("assets/sounds/text01.wav"),
+                            new FlxSound().loadEmbedded("assets/sounds/text02.wav"),
+                            new FlxSound().loadEmbedded("assets/sounds/text03.wav"),
+                            new FlxSound().loadEmbedded("assets/sounds/text04.wav"),
+                            new FlxSound().loadEmbedded("assets/sounds/text05.wav")];
         textSprite.alignment = FlxTextAlign.LEFT;
         textSprite.color = FlxColor.WHITE;
         textSprite.scrollFactor.set(0, 0);

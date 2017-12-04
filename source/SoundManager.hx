@@ -70,4 +70,27 @@ class SoundManager {
     {
         FlxG.sound.play("assets/sounds/" + FlxG.random.getObject(shoutSounds), 1.5);
     }
+
+    public function playMusic()
+    {
+        if (FlxG.sound.music == null || !FlxG.sound.music.playing)
+        {
+            FlxG.sound.playMusic("assets/music/music.mp3", .35);
+        }
+    }
+
+    public function getTextSounds():Array<FlxSound>
+    {
+        var returnArray = new Array<FlxSound>();
+
+        for (i in 1...6)
+        {
+            var sound = new FlxSound();
+            sound.loadEmbedded("assets/sounds/text0" + i + ".wav");
+            sound.volume = 0.25;
+            returnArray[i] = sound;
+        }
+
+        return returnArray;
+    }
 }

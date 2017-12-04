@@ -35,6 +35,8 @@ class MenuScreen extends FlxState {
         credits.setFormat("assets/Bullio.ttf", 12, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         credits.y = FlxG.height - credits.height - 5;
         add(credits);
+
+        SoundManager.getInstance().playMusic();
     }
 
     override public function update(elapsed:Float):Void {
